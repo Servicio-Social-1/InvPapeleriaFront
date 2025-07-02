@@ -1,0 +1,15 @@
+<h1>Solicitantes</h1>
+<!-- TODO AGREGAR LAS BUSQUEDAS DE USUARIOS EN EL BACK -->
+
+<app-search [context]="'petitioners'">
+    <button mat-raised-button color="primary" class="button" (click)="openDialog()">Agregar solicitante</button>
+</app-search>
+
+
+<app-table [dataToDisplay]="petitioners" [displayedColumns]="columns" [errorMsg]="errorMsg" *ngIf="!isSearching; else searchTable">
+</app-table>
+
+<ng-template #searchTable>
+    <app-table [dataToDisplay]="petitionersFromSearch" [displayedColumns]="columns" [errorMsg]="errorMsg">
+    </app-table>
+</ng-template>

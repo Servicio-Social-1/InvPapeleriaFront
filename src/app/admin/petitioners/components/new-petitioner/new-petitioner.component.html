@@ -1,0 +1,38 @@
+<mat-card-title>{{data.title}}</mat-card-title>
+<mat-card-content>
+    <form autocomplete="off" (ngSubmit)="createItem()" [formGroup]="newPetitionerForm" #formDirective="ngForm">
+        <!-- Campo nombre -->
+        <mat-form-field appearance="fill" class="mt mb">
+            <mat-label>Nombre</mat-label>
+            <input matInput type="text" placeholder="Nombre del solicitante" formControlName="name">
+            <mat-error *ngIf="requiredInputInvalidator('name')">
+                El nombre del área es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="minLengthInputInvalidator('name')">
+                El nombre del debe ser de mínimo <strong>3</strong> caracteres
+            </mat-error>
+            <mat-error *ngIf="maxLengthInputInvalidator('name')">
+                El nombre del debe ser de máximo <strong>100</strong> caracteres
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Campo de Área -->
+        <mat-form-field appearance="fill" class="mt mb">
+            <mat-label>Área</mat-label>
+            <mat-select formControlName="area" [errorStateMatcher]="matcher">
+                <mat-option>Seleccionar</mat-option>
+                <mat-option *ngFor="let area of areas" [value]="area.id">
+                    {{area.name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="requiredInputInvalidator('area')">Debe seleccionar un Área</mat-error>
+        </mat-form-field>
+
+        <mat-card-actions class="flex">
+            <button mat-raised-button color="primary" type="submit">
+                <mat-icon>save_alt</mat-icon>
+                Guardar
+            </button>
+            <button mat-raised-button (click)="closeDialog()" type="button">Cerrar</button>
+        </mat-card-actions>
+    </form>
+</mat-card-content>

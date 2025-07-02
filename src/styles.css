@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body,
+app-root {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.login-bg {
+    position: fixed;
+    min-width: 100%;
+    background-image: url('./assets/img/login-background.jpeg.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+
+/* activate scroll in dialog */
+
+.cdk-global-overlay-wrapper {
+    overflow: auto;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+mat-spinner {
+    margin: auto;
+}

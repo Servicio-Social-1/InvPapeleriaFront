@@ -1,0 +1,8 @@
+<p>{{message}}</p>
+<ng-container *ngIf="data?.isConfirmMessage">
+    <div class="flex">
+        <button mat-raised-button color="warn" (click)="confirm(true)">Sí</button>
+        <span class="spacer"></span>
+        <button mat-raised-button color="primary" (click)="confirm(false)">No</button>
+    </div>
+</ng-container>

@@ -1,0 +1,17 @@
+<h1>Vales de salida</h1>
+<app-search [context]="'departure-ticket'" findBy="Area, solicitante, email o usuario">
+    <button mat-raised-button color="primary" class="button" (click)="openNewDepartureTicketDialog()">Agregar nuevo vale de
+        salida</button>
+</app-search>
+
+
+<app-table [dataToDisplay]="departureTickets" [displayedColumns]="columns" [errorMsg]="errorMsg" *ngIf="!isSearching; else searchTable">
+</app-table>
+
+<ng-template #searchTable>
+    <app-table [dataToDisplay]="departureTicketsFromSearch" [displayedColumns]="columns" [errorMsg]="errorMsg">
+    </app-table>
+</ng-template>
+<!-- <app-table></app-table> -->
+<app-paginator [pageSize]="limitAndOffsetAndSize.limit" [count]="departureTicketCount">
+</app-paginator>

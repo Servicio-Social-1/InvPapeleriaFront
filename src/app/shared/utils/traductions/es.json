@@ -1,0 +1,20 @@
+{
+    "id": "id",
+    "date": "fecha",
+    "time": "hora",
+    "petitioner": "solicitante",
+    "area": "area",
+    "user": "usuario",
+    "no-items-found": "No se encontraron items",
+    "description": "descripción",
+    "stock": "stock",
+    "size": "medida",
+    "options": "opciones",
+    "amount": "cantidad",
+    "status": "estado",
+    "email": "email",
+    "role": "rol",
+    "name": "nombre",
+    "barcode": "Código de barras",
+    "dynamic-amount": "cantidad"
+}

@@ -1,0 +1,15 @@
+<mat-card>
+    <mat-card-title>Confirmar vale de salida</mat-card-title>
+    <mat-card-content>
+        <p>Área: {{petitioner?.area?.name}}</p>
+        <p>Solicitante: {{petitioner?.name}}</p>
+        <app-table [displayedColumns]="articlesToConfirmColumns" [dataToDisplay]="articlesToConfirm"></app-table>
+    </mat-card-content>
+    <mat-card-actions class="flex">
+        <button mat-raised-button color="primary" type="button" (click)="closeDialog(true)">
+            <mat-icon>save_alt</mat-icon>
+            Confirmar
+        </button>
+        <button mat-raised-button (click)="closeDialog(false)" type="button">Cancelar todo</button>
+    </mat-card-actions>
+</mat-card>

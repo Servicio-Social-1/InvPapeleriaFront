@@ -1,0 +1,102 @@
+table {
+    width: 100%;
+}
+
+button {
+    margin: 16px 8px;
+}
+
+/* Structure */
+.container {
+    position: relative;
+}
+
+.example-table-container {
+    position: relative;
+    overflow: auto;
+}
+
+table {
+    width: 100%;
+}
+
+.example-loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 56px;
+    right: 0;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.example-rate-limit-reached {
+    max-width: 360px;
+    text-align: center;
+}
+
+/* Column Widths */
+.mat-column-number,
+.mat-column-state {
+    max-width: 64px;
+}
+
+.mat-column-created {
+    max-width: 124px;
+}
+
+/* Make the 'Opciones' column narrower and closer to the previous column */
+.mat-column-options {
+    max-width: 70px;
+    width: 70px;
+    min-width: 50px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+td,
+th {
+    text-align: center !important;
+    vertical-align: middle !important;
+}
+
+.mat-sort-header-container {
+    justify-content: center !important;
+}
+
+.table-options-cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0; /* Reduce gap for less separation */
+    padding: 0;
+}
+
+.edit-btn, .delete-btn {
+    transform: scale(1.2); /* Slightly smaller for compactness */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px #0002;
+    margin: -50% 2px;
+}
+
+td button.mat-icon-button {
+    margin: 0;
+}
+
+.edit-btn {
+    background: #1976d2;
+    color: #fff;
+    width: 2%;
+    height: 2%;
+}
+
+.delete-btn {
+    background: #d32f2f;
+    color: #fff;
+    width: 2%;
+    height: 2%;
+}
+

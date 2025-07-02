@@ -1,0 +1,68 @@
+<mat-card-title>{{data.title}}</mat-card-title>
+<mat-card-content>
+    <form autocomplete="off" (ngSubmit)="createItem()" [formGroup]="newUserForm" #formDirective="ngForm">
+        <!-- Campo email -->
+        <mat-form-field appearance="fill" class="mt">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" placeholder="Email del usuario" formControlName="email">
+            <mat-error *ngIf="requiredInputInvalidator('email')">
+                El email es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="emailInputInvalidator('email')">
+                El email no es <strong>válido</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Campo nombre -->
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput type="text" placeholder="Nombre del solicitante" formControlName="name">
+            <mat-error *ngIf="requiredInputInvalidator('name')">
+                El nombre del área es <strong>obligatorio</strong>
+            </mat-error>
+            <mat-error *ngIf="minLengthInputInvalidator('name')">
+                El nombre del debe ser de mínimo <strong>3</strong> caracteres
+            </mat-error>
+            <mat-error *ngIf="maxLengthInputInvalidator('name')">
+                El nombre del debe ser de máximo <strong>100</strong> caracteres
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Campo password -->
+        <mat-form-field appearance="fill" class="mt mb">
+            <mat-label>Contraseña</mat-label>
+            <input matInput type="password" placeholder="Descripción del producto" formControlName="password">
+            <mat-error *ngIf="minLengthInputInvalidator('password')">
+                La <strong>contraseña</strong> debe de ser de 8 caracteres o más, y tener por lo menos una
+                <strong>mayúscula</strong>, una <strong>minúscula</strong> y un <strong>número</strong>
+            </mat-error>
+            <mat-error *ngIf="maxLengthInputInvalidator('password')">
+                La <strong>contraseña</strong> debe de ser de máximo 20 caracteres
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Campo de Role (en caso de requerirlo) -->
+        <!-- <mat-form-field appearance="fill" class="mt">
+            <mat-label>Role</mat-label>
+            <mat-select formControlName="size" [errorStateMatcher]="matcher">
+                <mat-option>Seleccionar</mat-option>
+                <mat-option value="Pieza">
+                    User
+                </mat-option>
+                <mat-option value="Caja">
+                    Admin
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="requiredInputInvalidator('size')">
+                El role es <strong>obligatorio</strong>
+            </mat-error>
+        </mat-form-field> -->
+        <mat-card-actions class="flex">
+            <button mat-raised-button color="primary" type="submit">
+                <mat-icon>save_alt</mat-icon>
+                Guardar
+            </button>
+            <button mat-raised-button (click)="closeDialog()" type="button">Cerrar</button>
+        </mat-card-actions>
+    </form>
+</mat-card-content>

@@ -1,0 +1,18 @@
+<h1>Inventario</h1>
+<app-search [context]="'inventory'">
+    <button mat-raised-button color="primary" class="button" (click)="openDialog()">Agregar nuevo artículo</button>
+    <button mat-raised-button color="accent" class="button" (click)="openReport()">Reporte</button>
+</app-search>
+
+<app-table [dataToDisplay]="articles" [displayedColumns]="columns" [errorMsg]="errorMsg" [isAdmin]="isAdmin"
+    (deleted)="onArticleDeleted()"
+    *ngIf="!isSearching; else searchTable">
+</app-table>
+
+<ng-template #searchTable>
+    <app-table [dataToDisplay]="articlesFromSearch" [displayedColumns]="columns" [errorMsg]="errorMsg" [isAdmin]="isAdmin">
+    </app-table>
+</ng-template>
+<!-- <app-table></app-table> -->
+<app-paginator [pageSize]="limitAndOffsetAndSize.limit" [count]="articleCount">
+</app-paginator>

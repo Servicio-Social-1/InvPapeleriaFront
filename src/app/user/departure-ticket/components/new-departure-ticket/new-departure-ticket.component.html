@@ -1,0 +1,107 @@
+<mat-card>
+    <mat-card-title>{{data.title}}</mat-card-title>
+    <mat-card-content>
+        <form autocomplete="off" [formGroup]="newItemForm" #formDirective="ngForm">
+            <!-- Campo fecha -->
+            <mat-form-field appearance="fill">
+                <mat-label>Fecha</mat-label>
+                <input matInput disabled [value]="dateValue">
+            </mat-form-field>
+
+            <!-- Campo de Área -->
+            <mat-form-field appearance="fill" class="mt">
+                <mat-label>Área</mat-label>
+                <mat-select formControlName="area" [errorStateMatcher]="matcher">
+                    <mat-option (click)="disablePetittionerOptions()">Seleccionar</mat-option>
+                    <mat-option *ngFor="let area of areas" [value]="area.id" (click)="getPetitioners(area.id)">
+                        {{area.name}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="requiredInputInvalidator('area')">Debe seleccionar un Área</mat-error>
+            </mat-form-field>
+
+            <!-- Campo de Solicitante -->
+            <mat-form-field appearance="fill" class="mt">
+                <mat-label>Solicitante</mat-label>
+                <mat-select formControlName="petitioner" [errorStateMatcher]="matcher">
+                    <mat-option>Seleccionar</mat-option>
+                    <ng-container *ngIf="!!petitioners.length; else fromDialogData">
+                        <mat-option *ngFor="let petitioner of petitioners" [value]="petitioner.petitioner_id">
+                            {{petitioner.petitioner_name}}
+                        </mat-option>
+                    </ng-container>
+                    <ng-template #fromDialogData>
+                        <mat-option [value]="this.data?.petitioner?.id">
+                            {{data?.petitioner?.name}}
+                        </mat-option>
+                    </ng-template>
+                </mat-select>
+                <mat-error *ngIf="requiredInputInvalidator('petitioner')">Debe seleccionar un Solicitante</mat-error>
+            </mat-form-field>
+            <app-search [context]="'article'" findBy="Buscar artículos por descripción"></app-search>
+
+            <!-- TODO: cambiar por mat-table -->
+            <app-table [dataToDisplay]="articlesFromSearch" [displayedColumns]="articlesFromSearchColumns"></app-table>
+
+            <table
+              mat-table
+              [dataSource]="selectedArticles" class="mat-elevation-z8"
+              formArrayName="amountSelectedItemsForm"
+            >
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+              </ng-container>
+              <ng-container matColumnDef="description">
+                <th mat-header-cell *matHeaderCellDef> Descripción </th>
+                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+              </ng-container>
+              <ng-container matColumnDef="stock">
+                <th mat-header-cell *matHeaderCellDef> Stock </th>
+                <td mat-cell *matCellDef="let element"> {{element.stock}} </td>
+              </ng-container>
+              <ng-container matColumnDef="size">
+                <th mat-header-cell *matHeaderCellDef> Medida </th>
+                <td mat-cell *matCellDef="let element"> {{element.size}} </td>
+              </ng-container>
+              <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+                <td mat-cell *matCellDef="let element; let index = index" [formGroupName]="index">
+                  <mat-form-field class="input-amount">
+                    <input matInput type="number" formControlName="amount" min="0" max="10000">
+                    <mat-error *ngIf="minCuantityInputInvalidator('amountSelectedItemsForm', index)">
+                    La cantidad debe ser mayor o igual a 0
+                </mat-error>
+                <mat-error *ngIf="maxCuantityInputInvalidator('amountSelectedItemsForm', index)">
+                    La cantidad máxima es de <strong>10000</strong> unidades
+                </mat-error>
+                <mat-error *ngIf="requiredInputInvalidator('amountSelectedItemsForm', index)">
+                    Las existencias son <strong>obligatorias</strong>
+                </mat-error>
+                <mat-error *ngIf="intInputInvalidator('amountSelectedItemsForm', index)">
+                    La cantidad debe ser un número entero <strong>válido</strong>
+                </mat-error>
+                  </mat-form-field>
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="options">
+                <th mat-header-cell *matHeaderCellDef> Opciones </th>
+                <td mat-cell *matCellDef="let element">
+                  <mat-icon (click)="removeItem(element)" class="pointer">delete</mat-icon>
+                </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="articlesToUpdateColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: articlesToUpdateColumns; let i = index"></tr>
+            </table>
+
+
+
+            <mat-card-actions class="flex">
+                <button mat-raised-button color="primary" type="button" (click)="submit()">
+                    <mat-icon>save_alt</mat-icon>
+                    Guardar
+                </button>
+                <button mat-raised-button (click)="closeDialog()" type="button">Cerrar</button>
+            </mat-card-actions>
+        </form>
+    </mat-card-content>
+</mat-card>

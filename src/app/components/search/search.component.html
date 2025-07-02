@@ -1,0 +1,15 @@
+<div class="flex">
+    <mat-form-field appearance="fill">
+        <mat-label>{{findBy || 'Buscar'}}</mat-label>
+        <input type="text" matInput [formControl]="termControl" maxlength="20" autocomplete="off"
+            (input)="handleInput()">
+        <button mat-icon-button matPrefix type="button" (click)="reset()">
+            <mat-icon matPrefix>close</mat-icon>
+        </button>
+        <button mat-icon-button matSuffix type="button" (click)="search()">
+            <mat-icon matSuffix>search</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <ng-content></ng-content>
+</div>

@@ -1,0 +1,44 @@
+<mat-drawer-container class="container" autosize>
+    <mat-drawer #drawer class="sidenav" mode="side">
+        <mat-nav-list>
+            <a mat-list-item (click)="changeRoute('user', 'departure-ticket')">
+                <mat-icon mat-list-icon>confirmation_number</mat-icon>
+                <span class="spacer"></span>
+                <span>Vale de salida</span>
+            </a>
+            <!-- <a mat-list-item (click)="changeRoute('user', 'entry-ticket')">
+                <mat-icon mat-list-icon>assignment_returned</mat-icon>
+                <span class="spacer"></span>
+                <span>Vale de entrada</span>
+            </a> -->
+            <a mat-list-item (click)="changeRoute('user', 'inventory')">
+                <mat-icon mat-list-icon>inventory</mat-icon>
+                <span class="spacer"></span>
+                <span>Inventario</span>
+            </a>
+            <a mat-list-item (click)="changeRoute('admin', 'users')" *ngIf="isAdmin">
+                <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
+                <span class="spacer"></span>
+                <span>Usuarios</span>
+            </a>
+            <a mat-list-item (click)="changeRoute('admin', 'areas')" *ngIf="isAdmin || isUser">
+                <mat-icon mat-list-icon>public</mat-icon>
+                <span class="spacer"></span>
+                <span>Areas</span>
+            </a>
+            <a mat-list-item (click)="changeRoute('admin', 'petitioners')" *ngIf="isAdmin || isUser">
+                <mat-icon mat-list-icon>person_outline</mat-icon>
+                <span class="spacer"></span>
+                <span>Solicitantes</span>
+            </a>
+            <!-- <a routerLink="./" mat-list-item (click)="drawer.toggle()">
+                <mat-icon mat-list-icon>crop_free</mat-icon>
+                <span class="spacer"></span>
+                <span>Código de barras</span>
+            </a> -->
+        </mat-nav-list>
+
+    </mat-drawer>
+
+    <ng-content></ng-content>
+</mat-drawer-container>

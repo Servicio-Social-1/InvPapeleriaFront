@@ -1,0 +1,28 @@
+mat-form-field {
+    width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.input-amount {
+  width: fit-content;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+app-table {
+    margin: 20px;
+}
+
+.mb {
+    margin-bottom: 50px;
+}

@@ -1,0 +1,15 @@
+<h1>Áreas</h1>
+<!-- TODO AGREGAR LAS BUSQUEDAS DE USUARIOS EN EL BACK -->
+
+<app-search [context]="'areas'">
+    <button mat-raised-button color="primary" class="button" (click)="openDialog()">Agregar nueva área</button>
+</app-search>
+
+
+<app-table [dataToDisplay]="areas" [displayedColumns]="columns" [errorMsg]="errorMsg" *ngIf="!isSearching; else searchTable">
+</app-table>
+
+<ng-template #searchTable>
+    <app-table [dataToDisplay]="areasFromSearch" [displayedColumns]="columns" [errorMsg]="errorMsg">
+    </app-table>
+</ng-template>

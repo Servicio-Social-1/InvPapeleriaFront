@@ -1,0 +1,10 @@
+mat-form-field {
+    margin-bottom: 10px;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}

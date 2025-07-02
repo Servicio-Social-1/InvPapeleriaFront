@@ -1,0 +1,52 @@
+<mat-card-title>Nuevo Artículo</mat-card-title>
+<mat-card-content>
+    <form autocomplete="off" (ngSubmit)="createItem()" [formGroup]="newItemForm" #formDirective="ngForm">
+        <mat-form-field appearance="fill" class="mt">
+            <mat-label>Código</mat-label>
+            <input matInput disabled value="SPS-001">
+        </mat-form-field>
+
+        <!-- Campo descripcion -->
+        <mat-form-field appearance="fill" class="mt">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput type="text" placeholder="Descripción del producto"
+                formControlName="description"></textarea>
+            <mat-error *ngIf="requiredInputInvalidator('description')">
+                La descripción es <strong>obligatoria</strong>
+            </mat-error>
+            <mat-error *ngIf="minLengthInputInvalidator('description')">
+                La descripción debe ser de más de <strong>3</strong> caracteres
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Campo de Stock -->
+        <mat-form-field appearance="fill" class="mt">
+            <mat-label>Existencias</mat-label>
+            <input matInput type="number" placeholder="Existencias del producto" autocomplete="off"
+                formControlName="stock" min="0">
+            <mat-error *ngIf="minCuantityInputInvalidator('stock')">
+                Las existencias deben ser mayores o iguales a 0
+            </mat-error>
+            <mat-error *ngIf="requiredInputInvalidator('stock')">
+                Las existencias son <strong>obligatorias</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <!-- Campo de Medidas -->
+        <mat-form-field appearance="fill" class="mt">
+            <mat-label>Medidas</mat-label>
+            <input matInput type="text" placeholder="Medidas del producto" autocomplete="off" formControlName="measures"
+                min="0">
+            <mat-error *ngIf="requiredInputInvalidator('measures')">
+                Las medidas son <strong>obligatorias</strong>
+            </mat-error>
+        </mat-form-field>
+        <mat-card-actions class="flex">
+            <button mat-raised-button color="primary" type="submit">
+                <mat-icon>save_alt</mat-icon>
+                Registrar
+            </button>
+            <button mat-raised-button (click)="closeDialog()">Cerrar</button>
+        </mat-card-actions>
+    </form>
+</mat-card-content>
