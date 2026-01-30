@@ -1,29 +1,36 @@
-# Use an official Node.js runtime as a parent image
-FROM node:16 as build
+# Stage 1: Build the Angular application
+FROM node:18-alpine AS build
 
-# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package files
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm ci
 
-# Copy the rest of the application code
+# Copy the rest of the application
 COPY . .
 
-# Build the Angular application
-RUN npm run build --prod
+# Build the Angular app for production
+RUN npm run build -- --configuration production
 
-# Use an Apache image to serve the built application
-FROM httpd:alpine
+# Stage 2: Serve the app with Apache
+FROM httpd:2.4-alpine
 
-# Copy the built Angular app to the Apache HTML directory
-COPY --from=build /app/dist/ /usr/local/apache2/htdocs/
+# Enable mod_rewrite
+RUN sed -i '/LoadModule rewrite_module/s/^#//g' /usr/local/apache2/conf/httpd.conf && \
+    sed -i 's/AllowOverride None/AllowOverride All/g' /usr/local/apache2/conf/httpd.conf && \
+    sed -i 's/Listen 80/Listen 4300/g' /usr/local/apache2/conf/httpd.conf
 
-# Expose port 80 to the outside world
+# Copy the built app from the build stage
+COPY --from=build /app/dist/InvPapeleriaFront /usr/local/apache2/htdocs/
+
+# Copy .htaccess for Angular routing
+COPY .htaccess /usr/local/apache2/htdocs/.htaccess
+
+# Expose port 4300
 EXPOSE 4300
 
-# Start Apache server
+# Start Apache
 CMD ["httpd-foreground"]
