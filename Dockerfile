@@ -23,21 +23,27 @@ RUN sed -i '/LoadModule rewrite_module/s/^#//g' /usr/local/apache2/conf/httpd.co
     sed -i 's/AllowOverride None/AllowOverride All/g' /usr/local/apache2/conf/httpd.conf && \
     sed -i 's/Listen 80/Listen 4300/g' /usr/local/apache2/conf/httpd.conf
 
+# Remove default Apache files
+RUN rm -rf /usr/local/apache2/htdocs/*
+
 # Copy all dist content
 COPY --from=build /app/dist/ /tmp/dist/
 
 # Move the actual build files to the correct location
 RUN if [ -d /tmp/dist/InvPapeleriaFront/browser ]; then \
-        mv /tmp/dist/InvPapeleriaFront/browser/* /usr/local/apache2/htdocs/; \
+        cp -r /tmp/dist/InvPapeleriaFront/browser/* /usr/local/apache2/htdocs/; \
     elif [ -d /tmp/dist/InvPapeleriaFront ]; then \
-        mv /tmp/dist/InvPapeleriaFront/* /usr/local/apache2/htdocs/; \
+        cp -r /tmp/dist/InvPapeleriaFront/* /usr/local/apache2/htdocs/; \
     else \
-        mv /tmp/dist/* /usr/local/apache2/htdocs/; \
+        cp -r /tmp/dist/* /usr/local/apache2/htdocs/; \
     fi && \
     rm -rf /tmp/dist
 
 # Copy .htaccess for Angular routing
 COPY .htaccess /usr/local/apache2/htdocs/.htaccess
+
+# Verify files were copied (for debugging)
+RUN ls -la /usr/local/apache2/htdocs/
 
 # Expose port 4300
 EXPOSE 4300
