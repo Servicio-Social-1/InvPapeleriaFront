@@ -16,14 +16,14 @@ COPY . .
 # Build the Angular application
 RUN npm run build --prod
 
-# Use an Nginx image to serve the built application
-FROM nginx:alpine
+# Use an Apache image to serve the built application
+FROM httpd:alpine
 
-# Copy the built Angular app to the Nginx HTML directory
-COPY --from=build /app/dist /usr/share/nginx/html
+# Copy the built Angular app to the Apache HTML directory
+COPY --from=build /app/dist/ /usr/local/apache2/htdocs/
 
 # Expose port 80 to the outside world
 EXPOSE 4300
 
-# Start Nginx server
-CMD ["nginx", "-g", "daemon off;"]
+# Start Apache server
+CMD ["httpd-foreground"]
