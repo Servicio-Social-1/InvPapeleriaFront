@@ -17,7 +17,7 @@
                                     <button *ngIf="option === 'add'" mat-icon-button type="button" (click)="handleOptions(element, 'add')">
                                         <mat-icon>add</mat-icon>
                                     </button>
-                                    <button *ngIf="option === 'edit' && isAdmin" mat-icon-button type="button" (click)="handleOptions(element, 'edit')">
+                                    <button *ngIf="option === 'edit'" mat-icon-button type="button" (click)="handleOptions(element, 'edit')">
                                         <mat-icon>edit</mat-icon>
                                     </button>
                                     <button *ngIf="option === 'delete' && isAdmin" mat-icon-button type="button" (click)="handleOptions(element, 'delete')">

@@ -193,7 +193,7 @@ export class DepartureTicketComponent implements OnInit, OnDestroy {
                 petitioner: departureTicket.petitioner.name,
                 area: departureTicket.area.name,
                 user: departureTicket.user.email,
-                options: this.isAdmin ? ['edit', 'picture_as_pdf'] : ['edit', 'picture_as_pdf']
+                options: ['edit', 'picture_as_pdf']
             }
         });
         this.departureTicketStore.updateDisplayedDepartureTickets(departureTickets);
