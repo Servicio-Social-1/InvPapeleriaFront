@@ -22,7 +22,7 @@ export class NewArticleComponent implements OnInit {
     @ViewChild('formDirective') private formDirective!: NgForm;
 
     newArticleForm: FormGroup = this.fb.group({
-        description: [, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+        description: [, [Validators.required, Validators.minLength(3), Validators.maxLength(200)]],
         stock: [, [Validators.required, Validators.pattern(/^[0-9]\d*$/)]],
         size: [, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]]
     });
