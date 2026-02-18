@@ -28,12 +28,7 @@ export class SearchService {
         return this.http.get<DepartureTicket[]>(`${this.baseUrl}/article-exit/${term}?limit=${limit}&offset=${offset}`)
         .pipe(tap((departureTickets) => {
             if(!departureTickets.length) {
-                this.dialogMessageService.setMessage('No se encontraron resultados');
-                this.dialogService.openDialog({
-                    component: DialogMessageComponent, data: {
-                        isConfirmMessage: false,
-                    }
-                });
+                alert('No se encontraron resultados');
             }
             return []
         }));
@@ -43,12 +38,7 @@ export class SearchService {
         return this.http.get<Article[]>(`${this.baseUrl}/articles/${term}?limit=${limit}&offset=${offset}`).pipe(
             tap((departureTickets) => {
             if(!departureTickets.length) {
-                this.dialogMessageService.setMessage('No se encontraron resultados');
-                this.dialogService.openDialog({
-                    component: DialogMessageComponent, data: {
-                        isConfirmMessage: false,
-                    }
-                });
+                alert('No se encontraron resultados');
             }
             return []
         }),
@@ -68,12 +58,7 @@ export class SearchService {
     return this.http.get<Petitioner[]>(`${this.baseUrl}/petitioner/search/${term}?limit=${limit}&offset=${offset}`)
     .pipe(tap((petitioners) => {
         if(!petitioners.length) {
-            this.dialogMessageService.setMessage('No se encontraron resultados');
-            this.dialogService.openDialog({
-                component: DialogMessageComponent, data: {
-                    isConfirmMessage: false,
-                }
-            });
+            alert('No se encontraron resultados');
         }
         return []
     }));
@@ -83,12 +68,7 @@ export class SearchService {
     return this.http.get<Area[]>(`${this.baseUrl}/area/search/${term}?limit=${limit}&offset=${offset}`)
     .pipe(tap((areas) => {
         if(!areas.length) {
-            this.dialogMessageService.setMessage('No se encontraron resultados');
-            this.dialogService.openDialog({
-                component: DialogMessageComponent, data: {
-                    isConfirmMessage: false,
-                }
-            });
+            alert('No se encontraron resultados');
         }
         return []
     }));
@@ -98,12 +78,7 @@ export class SearchService {
     return this.http.get<User[]>(`${this.baseUrl}/user/search/${term}?limit=${limit}&offset=${offset}`)
     .pipe(tap((users) => {
         if(!users.length) {
-            this.dialogMessageService.setMessage('No se encontraron resultados');
-            this.dialogService.openDialog({
-                component: DialogMessageComponent, data: {
-                    isConfirmMessage: false,
-                }
-            });
+            alert('No se encontraron resultados');
         }
         return []
     }));
