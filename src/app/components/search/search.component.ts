@@ -67,12 +67,13 @@ export class SearchComponent implements OnInit, OnDestroy {
     search() {
         if (!this.termControl.value?.trim().length) {
             this.termControl.markAllAsTouched();
-                this.dialogMessageService.setMessage('El texto de búsqueda está vacío');
-                this.dialogService.openDialog({
-                    component: DialogMessageComponent, data: {
-                        isConfirmMessage: false,
-                    }, callback: () => this.searchStoreService.updateValue('')
-                });
+            alert('El texto de búsqueda está vacío');
+                // this.dialogMessageService.setMessage('El texto de búsqueda está vacío');
+                // this.dialogService.openDialog({
+                //     component: DialogMessageComponent, data: {
+                //         isConfirmMessage: false,
+                //     }, callback: () => this.searchStoreService.updateValue('')
+                // });
             return;
         }
         this.searchStoreService.updateValue(this.termControl.value.trim());
